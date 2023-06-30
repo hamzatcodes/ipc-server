@@ -3,7 +3,6 @@ const fs = require("fs")
 const cloudinary = require("cloudinary").v2
 const path = require("path")
 // import { Media } from "../models";
-import path from "path";
 const { randomBytes } = require("crypto");
 
 // Uploads the file to cloudinary
@@ -99,4 +98,4 @@ async function uploadMultiple(
   next();
 }
 
-export { uploadMultiple };
+module.exports = { uploadMultiple };
