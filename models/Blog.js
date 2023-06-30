@@ -5,7 +5,7 @@ const blogCategorySchema = new mongoose.Schema(
     {
         name: {
             type: String,
-            required: true,
+            // required: true,
         },
         slug: {
             type: String,
@@ -27,7 +27,7 @@ const blogPostSchema = new mongoose.Schema(
     {
         title: {
             type: String,
-            required: true,
+            required: [true, "title is required"],
         },
         cover: {
             type: String,
@@ -35,7 +35,7 @@ const blogPostSchema = new mongoose.Schema(
         },
         snippet: {
             type: String,
-            required: true,
+            required: [true, "Snippet is required"],
         },
         contents: {
             type: Array,
