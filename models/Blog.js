@@ -50,7 +50,7 @@ const blogPostSchema = new mongoose.Schema(
             required: [true, "conclusion is required"],
         },
         category: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: String,
             required: [true, "category is required"],
             ref: "Category",
         },
