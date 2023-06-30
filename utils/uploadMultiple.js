@@ -1,9 +1,10 @@
 // import { Request, Response, NextFunction } from "express";
-import fs from "fs";
-import { v2 as cloudinary } from "cloudinary";
+const fs = require("fs")
+const cloudinary = require("cloudinary").v2
+const path = require("path")
 // import { Media } from "../models";
 import path from "path";
-import { randomBytes } from "crypto";
+const { randomBytes } = require("crypto");
 
 // Uploads the file to cloudinary
 function toCloudinary(req, res, next) {
