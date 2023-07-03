@@ -131,5 +131,5 @@ module.exports = {
     getPost,
     createPost,
     createCategory,
-    getCategories
+    getCategories,
 };

@@ -14,7 +14,7 @@ const upload = multer({ dest: "./temp" }).single("photo");
 const router = Router();
 
 router.route("/").get(getPosts).post(createPost);
-router.route("/:slug").get(getPost);
+router.route("/:id").get(getPost);
 router.route("/category").get(getCategories).post(createCategory);
 
 module.exports = router;
