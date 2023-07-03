@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const slugify = require("slugify")
+const slugify = require("slugify");
 
 const blogCategorySchema = new mongoose.Schema(
     {
@@ -37,9 +37,9 @@ const blogPostSchema = new mongoose.Schema(
             type: String,
             required: [true, "Snippet is required"],
         },
-        contents: {
-            type: Array,
-            required: [true, "Contents are required"],
+        content: {
+            type: String,
+            required: [true, "Content is required"],
         },
         headlines: {
             type: Array,
@@ -69,7 +69,7 @@ const blogPostSchema = new mongoose.Schema(
 
 blogPostSchema.pre("save", function (next) {
     this.slug =
-        slugify(this.postTitle, { lower: true }) + "-" + new Date().getTime();
+        slugify(this.title, { lower: true }) + "-" + new Date().getTime();
     next();
 });
 
