@@ -27,6 +27,10 @@ const businessCustomerSchema = mongoose.Schema(
         referral: {
             type: String,
         },
+        type: {
+            type: String,
+            default: "BUSINESS",
+        },
         password: {
             type: String,
             required: [true, "password is required"],

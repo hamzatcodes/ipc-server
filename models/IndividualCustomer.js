@@ -31,6 +31,10 @@ const individualCustomerSchema = mongoose.Schema(
         referral: {
             type: String,
         },
+        type: {
+            type: String,
+            default: "INDIVIDUAL",
+        },
         password: {
             type: String,
             required: [true, "password is required"],

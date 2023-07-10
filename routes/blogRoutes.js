@@ -1,4 +1,3 @@
-const multer = require("multer");
 const { Router } = require("express");
 const {
     createPost,
@@ -7,9 +6,6 @@ const {
     getPosts,
     getPost,
 } = require("../controllers/postController");
-// const { fileUploadMiddleware } = require("../utils/fileUploadMiddleware");
-// const { uploadMultiple } = require("../utils/uploadMultiple");
-const upload = multer({ dest: "./temp" }).single("photo");
 
 const router = Router();
 

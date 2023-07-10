@@ -33,10 +33,10 @@ const blogPostSchema = new mongoose.Schema(
             type: String,
             default: "no-photo",
         },
-        snippet: {
-            type: String,
-            required: [true, "Snippet is required"],
-        },
+        // snippet: {
+        //     type: String,
+        //     required: [true, "Snippet is required"],
+        // },
         content: {
             type: String,
             required: [true, "Content is required"],

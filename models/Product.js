@@ -30,10 +30,6 @@ const productSchema = new mongoose.Schema(
             type: Boolean,
             default: [true],
         },
-        quantity: {
-            type: Number,
-            // required: [true, "quantity is required"],
-        },
         brand: {
             type: String,
             required: [true, "brand is required"],
@@ -46,21 +42,10 @@ const productSchema = new mongoose.Schema(
             type: [String],
             required: [true, "images are required"],
         },
-        variants: {
-            type: [String],
-        },
-        sku: {
-            type: Number,
-        },
         slug: {
             type: String,
         },
-        productType: {
-            type: String,
-            required: [true, "product type is required"],
-            trim: true,
-        },
-        category: { type: mongoose.Types.ObjectId, ref: "Category" },
+        category: { type: String, ref: "Category" },
     },
     {
         timestamps: true,
