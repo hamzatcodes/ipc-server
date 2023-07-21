@@ -63,15 +63,12 @@ const getProductsByCategory = catchAsync(async (req, res, next) => {
     });
 });
 
-const createProduct = catchAsync(async (req, res, next) => {
-    let newProduct = await Product.create(req.body);
-    res.status(201).json({
-        status: "success",
-        data: {
-            product: newProduct,
-        },
-    });
-});
+// const createProduct = (urls) => {
+//     console.log(urls);
+//     return async (req, res, next) => {
+        
+//     };
+// };
 
 const updateProduct = catchAsync(async (req, res, next) => {
     let product = await Product.findByIdAndUpdate(req.params.id, req.body, {
@@ -186,13 +183,13 @@ const getAllProductsByCategory = catchAsync(async (req, res) => {
 
 module.exports = {
     getProducts,
-    createProduct,
+    // createProduct,
     getProduct,
     updateProduct,
     deleteProduct,
     aliasTopProducts,
     getAllProductsByCategory,
-    getProductsByCategory
+    getProductsByCategory,
     // getProductStats,
     // getMonthlyPlan,
     // deleteAllProducts,

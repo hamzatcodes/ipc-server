@@ -7,6 +7,7 @@ const individualCustomerRouter = require(`${__dirname}/routes/individualCustomer
 const errorHandler = require(`${__dirname}/controllers/errorController`);
 const productRouter = require(`${__dirname}/routes/productRoutes`);
 const blogRouter = require(`${__dirname}/routes/blogRoutes`);
+const categoryRouter = require(`${__dirname}/routes/categoryRoutes`);
 
 // Instantiate express app
 const app = express();
@@ -33,6 +34,7 @@ app.get("/", (req, res) => {
 app.use("/api/v1/individual-customers", individualCustomerRouter);
 app.use("/api/v1/business-customers", BusinessCustomerRouter);
 app.use("/api/v1/products", productRouter);
+app.use("/api/v1/categories", categoryRouter);
 app.use("/api/v1/blog", blogRouter);
 
 // Catch all error route

@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const bcrypt = require("bcryptjs");
 
-const phoneNumberSchema = mongoose.Schema({
-    number: {
-        type: String,
-    },
-});
+// const phoneNumberSchema = mongoose.Schema({
+//     number: {
+//         type: String,
+//     },
+// });
 
 const individualCustomerSchema = mongoose.Schema(
     {
@@ -18,7 +19,7 @@ const individualCustomerSchema = mongoose.Schema(
             required: [true, "last name is required"],
         },
         phoneNumbers: {
-            type: [phoneNumberSchema],
+            type: [String],
             required: [true, "Phone number is required"],
         },
         email: {
@@ -71,7 +72,7 @@ const individualCustomerSchema = mongoose.Schema(
 
 individualCustomerSchema.pre("save", async function (next) {
     if (!this.isModified("password")) return next();
-    this.password = await bcrypt.hash(this.password, 12);
+    this.password = bcrypt.hash(this.password, 12);
     this.confirmPassword = undefined;
     next();
 });

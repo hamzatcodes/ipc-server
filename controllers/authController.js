@@ -1,6 +1,7 @@
 const catchAsync = require("../utils/catchAsync");
 const signToken = require("../utils/signToken");
 const IndividualCustomer = require("../models/IndividualCustomer");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
     // Individual Customers
@@ -9,7 +10,7 @@ module.exports = {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
-            phoneNumbers: req.body.phoneNumber,
+            phoneNumbers: [...req.body.phoneNumber],
             password: req.body.password,
             confirmPassword: req.body.confirmPassword,
         });
@@ -106,7 +107,7 @@ module.exports = {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
-            phoneNumbers: req.body.phoneNumber,
+            phoneNumbers: [...req.body.phoneNumber],
             password: req.body.password,
             confirmPassword: req.body.confirmPassword,
         });

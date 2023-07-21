@@ -28,7 +28,7 @@ const productSchema = new mongoose.Schema(
         },
         inStock: {
             type: Boolean,
-            default: [true],
+            default: true,
         },
         brand: {
             type: String,
@@ -39,13 +39,13 @@ const productSchema = new mongoose.Schema(
             type: Number,
         },
         images: {
-            type: [String],
+            type: [Object],
             required: [true, "images are required"],
         },
         slug: {
             type: String,
         },
-        category: { type: String, ref: "Category" },
+        category: { type: String, ref: "Category", required: [true, "Category is required"] },
     },
     {
         timestamps: true,
