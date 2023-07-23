@@ -3,13 +3,15 @@ const Cart = require("../models/Cart");
 
 const addToCart = catchAsync(async (req, res, next) => {
     const newCartItem = await Cart.create({
-        product: req.body.product._id,
+        productId: req.body.product._id,
         quantity: req.body.quantity,
-        customer: req.body.customerId,
+        customerId: req.body.customerId,
     });
 });
 
-const getCartItems = catchAsync(async () => {});
+const getCartItems = catchAsync(async (req, res, next) => {
+    
+});
 
 const deleteCartItem = catchAsync(async () => {});
 

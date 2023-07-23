@@ -63,13 +63,6 @@ const getProductsByCategory = catchAsync(async (req, res, next) => {
     });
 });
 
-// const createProduct = (urls) => {
-//     console.log(urls);
-//     return async (req, res, next) => {
-        
-//     };
-// };
-
 const updateProduct = catchAsync(async (req, res, next) => {
     let product = await Product.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
@@ -120,6 +113,22 @@ const getAllProductsByCategory = catchAsync(async (req, res) => {
             data: products,
         });
     }
+});
+
+const getTotalCount = catchAsync(async (req, res, next) => {
+    const productsCount = await Product.count();
+    const productCountInStock = await Product.count({ inStock: true });
+    const productCountNotInStock = await Product.count({ inStock: false });
+    console.log(productCountInStock, "in stock");
+
+    res.status(200).json({
+        status: "success",
+        data: {
+            productsCount,
+            productCountInStock,
+            productCountNotInStock,
+        },
+    });
 });
 
 // const deleteAllProducts = async (req, res, next) => {
@@ -190,6 +199,7 @@ module.exports = {
     aliasTopProducts,
     getAllProductsByCategory,
     getProductsByCategory,
+    getTotalCount,
     // getProductStats,
     // getMonthlyPlan,
     // deleteAllProducts,

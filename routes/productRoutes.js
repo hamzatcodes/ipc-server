@@ -6,6 +6,7 @@ const {
     deleteProduct,
     getAllProductsByCategory,
     getProductsByCategory,
+    getTotalCount,
 } = require("../controllers/productController");
 const Product = require("../models/Product");
 const upload = require("../utils/multer");
@@ -17,6 +18,7 @@ const router = Router();
 
 router.get("/all-products-by-category/:category", getAllProductsByCategory);
 router.get("/product-by-category/:category", getProductsByCategory);
+router.route("/total-product-count").get(getTotalCount);
 
 router
     .route("/")
@@ -25,7 +27,7 @@ router
         getProducts
     )
     .post(
-        upload.array("image", 5),
+        upload.array("image", 4),
         catchAsync(async (req, res, next) => {
             const uploader = async (path) =>
                 await cloudinary.uploads(path, "Images");
