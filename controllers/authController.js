@@ -1,7 +1,9 @@
 const catchAsync = require("../utils/catchAsync");
 const signToken = require("../utils/signToken");
 const IndividualCustomer = require("../models/IndividualCustomer");
+const BusinessCustomer = require("../models/BusinessCustomer");
 const jwt = require("jsonwebtoken");
+const AppError = require("../utils/appError");
 
 module.exports = {
     // Individual Customers
@@ -10,7 +12,7 @@ module.exports = {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
-            phoneNumbers: [...req.body.phoneNumber],
+            phoneNumbers: [req.body.phoneNumber],
             password: req.body.password,
             confirmPassword: req.body.confirmPassword,
         });
@@ -41,7 +43,7 @@ module.exports = {
             !customer ||
             !(await customer.correctPassword(password, customer.password))
         ) {
-            return next(new AppError("incorrect email or password", 401));
+            return next(new AppError("incorrect email or password", 400));
         }
 
         let token = signToken(customer._id);
@@ -104,10 +106,11 @@ module.exports = {
 
     businessCustomerSignup: catchAsync(async function (req, res, next) {
         let newCustomer = await BusinessCustomer.create({
+            businessName: req.body.businessName,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
-            phoneNumbers: [...req.body.phoneNumber],
+            phoneNumbers: [req.body.phoneNumber],
             password: req.body.password,
             confirmPassword: req.body.confirmPassword,
         });
@@ -118,7 +121,7 @@ module.exports = {
             status: "success",
             token,
             data: {
-                user: newCustomer,
+                customer: newCustomer,
             },
         });
     }),
@@ -138,7 +141,7 @@ module.exports = {
             !customer ||
             !(await customer.correctPassword(password, customer.password))
         ) {
-            return next(new AppError("incorrect email or password", 401));
+            return next(new AppError("incorrect email or password", 400));
         }
 
         let token = signToken(customer._id);

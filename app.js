@@ -9,6 +9,9 @@ const productRouter = require(`${__dirname}/routes/productRoutes`);
 const blogRouter = require(`${__dirname}/routes/blogRoutes`);
 const categoryRouter = require(`${__dirname}/routes/categoryRoutes`);
 const customerRouter = require(`${__dirname}/routes/customerRoutes`);
+const cartRouter = require(`${__dirname}/routes/cartRoutes`);
+const paystackRouter = require(`${__dirname}/routes/paystackRoutes`);
+const orderRouter = require(`${__dirname}/routes/orderRoutes`);
 
 // Instantiate express app
 const app = express();
@@ -38,6 +41,9 @@ app.use("/api/v1/products", productRouter);
 app.use("/api/v1/categories", categoryRouter);
 app.use("/api/v1/blog", blogRouter);
 app.use("/api/v1/customers", customerRouter);
+app.use("/api/v1/cart", cartRouter);
+app.use("/api/v1/paystack", paystackRouter);
+app.use("/api/v1/orders", orderRouter);
 
 // Catch all error route
 app.all("*", (req, res, next) => {

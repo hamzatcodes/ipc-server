@@ -2,12 +2,6 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 
-// const phoneNumberSchema = mongoose.Schema({
-//     number: {
-//         type: String,
-//     },
-// });
-
 const individualCustomerSchema = mongoose.Schema(
     {
         firstName: {
@@ -57,9 +51,9 @@ const individualCustomerSchema = mongoose.Schema(
         addresses: {
             type: [String],
         },
-        createdAt: {
-            type: Date,
-            default: Date.now(),
+        verified: {
+            type: Boolean,
+            default: false,
         },
         passwordChangedAt: Date,
         passwordResetToken: String,
@@ -106,6 +100,14 @@ individualCustomerSchema.methods.createPasswordResetToken = function () {
         .digest("hex");
     this.passwordResetTime = Date.now() + 10 * 60 * 1000;
     return resetToken;
+};
+
+individualCustomerSchema.methods.checkVerification = function () {
+    if (this.verified) {
+        return true;
+    } else {
+        return false;
+    }
 };
 
 const IndividualCustomer = mongoose.model(

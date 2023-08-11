@@ -45,12 +45,21 @@ const productSchema = new mongoose.Schema(
         slug: {
             type: String,
         },
-        category: { type: String, ref: "Category", required: [true, "Category is required"] },
+        category: {
+            type: String,
+            ref: "Category",
+            required: [true, "Category is required"],
+        },
     },
     {
         timestamps: true,
     }
 );
+
+productSchema.pre("save", function (next) {
+    this.slug = slugify(this.name, { lower: true });
+    next();
+});
 
 const Product = mongoose.model("Product", productSchema);
 

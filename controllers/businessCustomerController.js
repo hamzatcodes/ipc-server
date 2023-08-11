@@ -2,7 +2,7 @@ const BusinessCustomer = require("../models/BusinessCustomer");
 const APIFeatures = require("../utils/apiFeatures");
 const catchAsync = require("../utils/catchAsync");
 
-const getCustomers = catchAsync(async () => {
+const getCustomers = catchAsync(async (req, res, next) => {
     let features = new APIFeatures(BusinessCustomer.find(), req.query)
         .filter()
         .sort()

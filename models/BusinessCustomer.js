@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-
-const phoneNumberSchema = mongoose.Schema({
-    number: {
-        type: String,
-    },
-});
+const bcrypt = require("bcryptjs");
 
 const businessCustomerSchema = mongoose.Schema(
     {
@@ -13,8 +8,16 @@ const businessCustomerSchema = mongoose.Schema(
             type: String,
             required: [true, "business name is required"],
         },
+        firstName: {
+            type: String,
+            required: [true, "first name is required"],
+        },
+        lastName: {
+            type: String,
+            required: [true, "first name is required"],
+        },
         phoneNumbers: {
-            type: [phoneNumberSchema],
+            type: [String],
             required: [true, "Phone number is required"],
         },
         email: {
@@ -49,12 +52,9 @@ const businessCustomerSchema = mongoose.Schema(
                 message: "Passwords do not match!",
             },
         },
-        addresses: {
-            type: [String],
-        },
-        createdAt: {
-            type: Date,
-            default: Date.now(),
+        verified: {
+            type: Boolean,
+            default: false,
         },
         passwordChangedAt: Date,
         passwordResetToken: String,
@@ -101,6 +101,14 @@ businessCustomerSchema.methods.createPasswordResetToken = function () {
         .digest("hex");
     this.passwordResetTime = Date.now() + 10 * 60 * 1000;
     return resetToken;
+};
+
+businessCustomerSchema.methods.checkVerification = function () {
+    if (this.verified) {
+        return true;
+    } else {
+        return false;
+    }
 };
 
 const BusinessCustomer = mongoose.model(
