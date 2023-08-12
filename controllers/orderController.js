@@ -23,7 +23,7 @@ const createOrder = catchAsync(async (req, res, next) => {
     let newOrder = await Order.create({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        products: [req.body.products],
+        products: req.body.products,
         customerId: req.body.customerId,
         phoneNumbers: req.body.phoneNumbers,
         address: req.body.address,
@@ -58,13 +58,35 @@ const updateOrder = catchAsync(async (req, res, next) => {
     });
 });
 
-// const getCustomerOrders = catchAsync(async(req, res, next) => {
-//     const orders = BusinessCustomer.find()
-// })
+const orderSummary = catchAsync(async (req, res, next) => {
+    const stats = await Order.aggregate([
+        {
+            $match: { status: "CONFIRMED" }
+        },
+        {
+            $group: {
+                _id: "_id",
+                productCount: { $sum: 1 },
+                totalSales: { $sum: "$totalPrice" },
+                avgPrice: { $avg: "$totalPrice" },
+                minPrice: { $min: "$totalPrice" },
+                maxPrice: { $max: "$totalPrice" },
+            },
+        },
+    ]);
+
+    res.status(200).json({
+        status: "success",
+        data: {
+            stats,
+        },
+    });
+});
 
 module.exports = {
     getOrders,
     createOrder,
     getOrder,
     updateOrder,
+    orderSummary,
 };

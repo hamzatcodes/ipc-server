@@ -110,7 +110,7 @@ module.exports = {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
-            phoneNumbers: [req.body.phoneNumber],
+            phoneNumbers: req.body.phoneNumber,
             password: req.body.password,
             confirmPassword: req.body.confirmPassword,
         });

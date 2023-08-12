@@ -18,6 +18,10 @@ const getTotalCount = catchAsync(async (req, res, next) => {
     });
 });
 
+const login = catchAsync(async (req, res, next) => {
+    
+});
+
 module.exports = {
     getTotalCount,
 };

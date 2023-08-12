@@ -4,9 +4,12 @@ const {
     createOrder,
     getOrder,
     updateOrder,
+    orderSummary,
 } = require("../controllers/orderController");
 
 const router = Router();
+
+router.route("/order-summary").get(orderSummary);
 
 router.route("/").get(getOrders).post(createOrder);
 
